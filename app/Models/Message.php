@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
+
+class Message extends Model
+{
+    protected $fillable = ['user_id' , 'message' , 'receiver_id' , 'reply_to' , 'seem' , 'group_id'];
+    public function user(){
+        return $this->belongsTo(User::class , 'user_id');
+    }
+    public function group(){
+        return $this->belongsTo(Group::class , 'group_id');
+    }
+}
