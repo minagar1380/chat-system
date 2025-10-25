@@ -1,11 +1,10 @@
 <div>
     <div class="container-fluid chat-wrapper">
 
-        <!-- هدر -->
         <div class="chat-header">
             <div class="user-info">
                 <img src="https://i.pravatar.cc/100?img=2" alt="Sara">
-                <h6>Sara</h6>
+                <h6>{{ $receiver->name }}</h6>
             </div>
             <div class="search-box">
                 <input type="text" id="searchMessages" class="form-control form-control-sm"
@@ -13,47 +12,20 @@
             </div>
         </div>
 
-        <!-- بدنه چت -->
-        <div class="chat-body" id="chatBody">
-            <div class="message other">سلام علی، خوبی؟</div>
-            <div class="message me">سلام سارا، مرسی. تو چطوری؟</div>
-            <div class="message other">منم خوبم. برای فردا آماده‌ای؟</div>
-            <div class="message me">آره حتما 👍</div>
-            <div class="message other">باشه پس فردا می‌بینمت.</div>
-            <div class="message me">منتظرم 🌹</div>
+        <div class="chat-body" id="chatBody" wire:poll.2s>
+
+        @foreach($messages as $msg)
+            <div class="message {{ $msg->user_id == $user_id ? 'me' : 'other' }}"> {{ $msg->message }} </div>
+            @endforeach
         </div>
 
-        <!-- فوتر -->
         <div class="chat-footer">
-            @livewire('message')
+            @livewire('message' , ['receiver' => $receiver])
         </div>
 
     </div>
 
-    <script>
-        const searchInput = document.getElementById("searchMessages");
-        const chatBody = document.getElementById("chatBody");
-        searchInput.addEventListener("keyup", function() {
-            const searchText = this.value.toLowerCase();
-            const messages = chatBody.getElementsByClassName("message");
 
-            for (let msg of messages) {
-                const text = msg.innerText.toLowerCase();
-                msg.innerHTML = msg.innerText; // ریست کردن هایلایت
-                if (searchText && text.includes(searchText)) {
-                    const regex = new RegExp(searchText, "gi");
-                    msg.innerHTML = msg.innerText.replace(regex, match =>
-                        `<span class="highlight">${match}</span>`);
-                    msg.style.display = "";
-                } else if (searchText && !text.includes(searchText)) {
-                    msg.style.display = "none";
-                } else {
-                    msg.style.display = "";
-                }
-            }
-        });
-
-    </script>
 </div>
 
 @push('styles')

@@ -36,7 +36,7 @@ class LoginRegister extends Component
             $this->addError('Lform.password', ' پسورد اشتباه است ، دوباره امتحان کنید');
             return;
         }
-        if(isset($this->Lform->remember)){
+        if(!empty($this->Lform->remember)){
             session()->regenerate();
         }
 
@@ -56,6 +56,7 @@ class LoginRegister extends Component
         // $inputs['email'] = $this->Rform->email;
         // $inputs['password'] = Hash::make($this->Rform->password);
         $user = User::create($this->Rform->all());
+        Auth::login($user);
         return redirect()->route('chats');
     }
 
