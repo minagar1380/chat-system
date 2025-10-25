@@ -17,12 +17,17 @@ class RegisterForm extends Form
     #[Validate]
     public string $password = '';
 
+    #[Validate]
+    public string $password_confirmation = '';
+
+
+
     protected function rules() : array
     {
         return [
             'name' => ['required','max:120','min:1','regex:/^[ا-یa-zA-Zء-ي ]+$/u'],
             'email' => ['required', 'string', 'email' , 'unique:users'],
-            'password' => ['required', Password::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised(), 'confirmed'],
+            'password' => ['required', Password::min(8)->letters()->mixedCase()->numbers()->symbols() , 'confirmed'],
         ];
     }
 
@@ -44,7 +49,7 @@ class RegisterForm extends Form
             'password.mixed' => 'رمز عبور باید شامل حروف کوچک و بزرگ باشد',
             'password.numbers' => 'رمز عبور باید شامل عدد باشد',
             'password.symbols' => 'رمز عبور باید حداقل شامل نماد باشد',
-            'password.uncompromised' => 'رمز عبور ضعیف است',
+            // 'password.uncompromised' => 'رمز عبور ضعیف است',
             'password.min' => 'رمز عبور باید حداقل 8 کارکتر باشد',
             'password.confirmed' => 'رمز عبور و تکرار آن یکسان نیست',
         ];

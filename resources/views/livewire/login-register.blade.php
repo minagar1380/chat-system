@@ -22,7 +22,7 @@
                         <!-- Password input -->
                         <div class="mb-3">
                             <label for="password" class="form-label">رمز عبور</label>
-                            <input type="password" class="form-control" id="password" wire:model.blur="Lform.password" placeholder="رمز عبور را وارد کنید" name="Lform.password"
+                            <input type="password" class="form-control" id="password" wire:model="Lform.password" placeholder="رمز عبور را وارد کنید" name="Lform.password"
                                 >
                                 <div class="text-danger">@error('Lform.password') {{ $message }} @enderror</div>
                         </div>
@@ -30,7 +30,7 @@
                         <!-- Remember me checkbox -->
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="remember" wire:model="remember">
-                            <label class="form-check-label" for="remember">ذخیره اطلاعات!</label>
+                            <label class="form-check-label" for="remember">مرا به خاطر بسپار!</label>
                         </div>
 
                         <!-- Submit button -->
@@ -40,7 +40,7 @@
 
                         <!-- Forgot password link -->
                         <p class="text-center mt-3">
-                            <a href="#">رمز عبور خود را فراموش کرده ام!</a>
+                            <a href="{{ route('password.reset.show') }}">رمز عبور خود را فراموش کرده ام!</a>
                         </p>
                     </form>
                 </div>
@@ -68,7 +68,7 @@
                         <!-- Password input -->
                         <div class="mb-3">
                             <label for="password" class="form-label">رمز عبور</label>
-                            <input type="password" class="form-control" id="password" placeholder="رمز عبور خود را وارد کنید" wire:model.blur="Rform.password" name="password"
+                            <input type="password" class="form-control" id="password" placeholder="رمز عبور خود را وارد کنید" wire:model="Rform.password" name="Rform.password"
                                 >
                                 <div class="text-danger">@error('Rform.password') {{ $message }} @enderror</div>
                         </div>
@@ -76,8 +76,9 @@
                         <!-- Confirm Password input -->
                         <div class="mb-3">
                             <label for="confirmPassword" class="form-label">رمز عبور مجدد</label>
-                            <input type="password" class="form-control" id="confirmPassword"
+                            <input type="password" class="form-control" id="confirmPassword" name="Rform.password_confirmation" wire:model="Rform.password_confirmation"
                                 placeholder="رمز عبور خود را مجددا وارد کنید" required>
+
                         </div>
 
                         <!-- Submit button -->

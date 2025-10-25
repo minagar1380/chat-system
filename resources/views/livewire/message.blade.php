@@ -1,7 +1,7 @@
 <div>
     <div class="form-message">
-        <textarea id="messageInput" class="form-control" rows="1" placeholder="پیام خود را بنویسید..."></textarea>
-        <button class="btn btn-success">➤</button>
+        <textarea id="messageInput" class="form-control" rows="1" placeholder="پیام خود را بنویسید..." wire:model="newMessage"></textarea>
+        <button type="submit" wire:click="makeMessage()" class="btn btn-success">➤</button>
     </div>
     <script>
         const textarea = document.getElementById("messageInput");
