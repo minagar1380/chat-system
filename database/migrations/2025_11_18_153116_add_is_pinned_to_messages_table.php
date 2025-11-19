@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->foreignId('chat_id')->after('seem')->constrained()->onDelete('cascade');
-
+            $table->boolean('is_pinned')->default(false)->after('message');
         });
     }
 

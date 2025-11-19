@@ -28,6 +28,7 @@ class Message extends Component
         $newMsg = MessageModel::create([
             'user_id' => Auth::id(),
             'message' => $this->newMessage,
+            'chat_id' =>  min(Auth::id(), $this->receiver->id) . '-' . max(Auth::id(), $this->receiver->id),
             'receiver_id' =>$this->receiver->id,
         ]);
 
